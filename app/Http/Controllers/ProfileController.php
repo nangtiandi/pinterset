@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Custom;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +26,7 @@ class ProfileController extends Controller
         }
         $user->password = Hash::make($request->password);
         $user->save();
-        return redirect()->back()->with('success','password successfully updated');
+        return redirect()->back()->with('toast',Custom::sweetAlert('success','Successfully Updated You Password'));
     }
     public function updateProfileView(){
         return view('profile.index');
@@ -50,7 +51,7 @@ class ProfileController extends Controller
         $currentUser->avatar = $newName;
         $currentUser->update();
 
-        return redirect()->back();
+        return redirect()->back()->with('toast',Custom::sweetAlert('success','Successfully Updated Your Profile'));
     }
     public function index(){
         $users = User::latest('id')->paginate(15);
@@ -72,6 +73,6 @@ class ProfileController extends Controller
     public function destroy($id){
         $user = User::findOrFail($id);
         $user->delete();
-        return redirect()->back()->with('success','successfully deleted');
+        return redirect()->back()->with('toast',Custom::sweetAlert('success','Successfully Deleted User'));
     }
 }

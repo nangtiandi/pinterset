@@ -44,7 +44,7 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="" class="form-label">Post Title</label>
+                            <label for="" class="form-label">Post Description</label>
                             <textarea name="description" cols="10" rows="5" class="form-control @error('description') is-invalid @enderror">{{old('description')}}</textarea>
                             @error('description')
                             <span class="alert alert-danger">

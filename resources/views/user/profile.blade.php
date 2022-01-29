@@ -50,15 +50,6 @@
             </div>
             <div class="col-md-6 col-xs-12 my-2">
                 <div class="card">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
                     @if(session('success'))
                         <div class="alert alert-success">{{session('success')}}</div>
                     @endif
@@ -67,7 +58,7 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="" class="form-label">Your Phone Number</label>
-                                <input type="tel" name="phone" class="form-control @error('phone') is-invalid @enderror" value="{{old('phone')}}">
+                                <input type="tel" name="phone" class="form-control @error('phone') is-invalid @enderror" value="{{old('phone')}}" min="11">
                                 @error('phone')
                                 <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -83,7 +74,7 @@
                                 </span>
                                 @enderror
                             </div>
-                            <button class="btn btn-outline-secondary">Upload Your Profile <i class="fas fa-upload"></i></button>
+                            <button class="btn btn-outline-secondary">Upload Your Profile <i class="fa fa-upload"></i></button>
                         </form>
                     </div>
                 </div>

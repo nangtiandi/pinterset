@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Custom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -25,7 +26,7 @@ class CommentController extends Controller
             $comment->delete();
             return back();
         }else{
-            return back()->with('error',"You can't delete other users comments.");
+            return back()->with('error',"You can't delete other user's post");
         }
 //        if ($comment->user_id == auth()->user()->id){
 //            $comment->delete();

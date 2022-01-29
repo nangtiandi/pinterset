@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use App\Models\Custom;
 use App\Models\Post;
 
 class CategoryController extends Controller
@@ -41,7 +42,7 @@ class CategoryController extends Controller
         $category = new Category();
         $category->name = $request->name;
         $category->save();
-        return redirect()->route('category.index');
+        return redirect()->route('category.index')->with('toast',Custom::sweetAlert('success','Successfully Created Category'));
     }
 
     /**
@@ -77,7 +78,7 @@ class CategoryController extends Controller
     {
         $category->name = $request->name;
         $category->update();
-        return redirect()->route('category.index');
+        return redirect()->route('category.index')->with('toast',Custom::sweetAlert('success','Successfully Updated Category'));
     }
 
     /**
@@ -89,6 +90,6 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return redirect()->back();
+        return redirect()->back()->with('toast',Custom::sweetAlert('success','Successfully Deleted Category'));
     }
 }

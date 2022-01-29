@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Models\Category;
+use App\Models\Custom;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
@@ -68,11 +69,11 @@ class HomeController extends Controller
         $currentUser->avatar = $newName;
         $currentUser->update();
 
-        return redirect()->back()->with('success','Updated Your Profile Photo');
+        return redirect()->back()->with('toast',Custom::sweetAlert('success','Successfully Uploaded Your Profile'));
     }
     public function updateProfile(Request $request){
         $request->validate([
-            'phone' => 'required',
+            'phone' => 'required|min:11|numeric',
             'bio' => 'required|max:225',
         ]);
 
@@ -82,12 +83,12 @@ class HomeController extends Controller
         $currentUser->bio = $request->bio;
         $currentUser->update();
 
-        return redirect()->back()->with('success','Thanks For Your filling!');
+        return redirect()->back()->with('toast',Custom::sweetAlert('success','Success Confirm Information'));
     }
     public function postOwner(){
         $posts = Post::when(isset(request()->search),function ($query){
             $query->where('title','like','%'.request()->search.'%');
-        })->where('user_id',Auth::id())->get();
+        })->where('user_id',Auth::id())->latest('id')->get();
 //        $posts = Post::where('user_id',Auth::id())->get();
         return view('user.post-owner',compact('posts'));
     }
@@ -115,7 +116,7 @@ class HomeController extends Controller
         $requestPhoto->storeAs('public/product',$newName);
         $post->photo = $newName;
         $post->save();
-        return redirect()->route('post.owner')->with('success','Your Uploading is success.');
+        return redirect()->route('post.owner')->with('toast',Custom::sweetAlert('success','Successfully Uploaded Post'));
 
     }
 }

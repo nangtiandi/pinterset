@@ -57,7 +57,27 @@
 
 <!-- Page level custom scripts -->
 <script src="{{asset('js/demo/datatables-demo.js')}}"></script>
+<script src="{{asset('js/app.js')}}"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+    @if(session('toast'))
+    let sessionInfo = @json(session('toast'));
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'bottom-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+    })
+    Toast.fire({
+        icon: sessionInfo.icon,
+        title: sessionInfo.title
+    })
+@endif
     let photoForm = document.getElementById('photoForm');
     let photoInput = document.getElementById('photoInput');
     let photoBtn = document.getElementById('photoBtn');

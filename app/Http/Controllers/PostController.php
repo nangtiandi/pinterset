@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Custom;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
@@ -51,7 +52,7 @@ class PostController extends Controller
         $requestPhoto->storeAs('public/product',$newName);
         $post->photo = $newName;
         $post->save();
-        return redirect()->route('post.index');
+        return redirect()->route('post.index')->with('toast',Custom::sweetAlert('success','Successfully Created Post'));
 
     }
 
@@ -97,7 +98,7 @@ class PostController extends Controller
         $requestPhoto->storeAs('public/product',$newName);
         $post->photo = $newName;
         $post->update();
-        return redirect()->route('post.index');
+        return redirect()->route('post.index')->with('toast',Custom::sweetAlert('success','Successfully Updated Post'));
     }
 
     /**
@@ -109,6 +110,6 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        return redirect()->back();
+        return redirect()->back()->with('toast',Custom::sweetAlert('success','Successfully Deleted Post'));
     }
 }

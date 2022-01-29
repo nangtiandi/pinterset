@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Custom;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -50,7 +51,7 @@ class LoginController extends Controller
         $user = Socialite::driver('google')->user();
         $this->_registerOrLoginUser($user);
 
-        return redirect()->route('/');
+        return redirect()->route('/')->with('toast',Custom::sweetAlert('success','Thanks For Login with Google!'));
     }
     # Facebook Login
     public function redirectToFacebook(){
@@ -61,7 +62,7 @@ class LoginController extends Controller
         $user = Socialite::driver('facebook')->user();
         $this->_registerOrLoginUser($user);
 
-        return redirect()->route('/');
+        return redirect()->route('/')->with('toast',Custom::sweetAlert('success','Thanks For login with Facebook!'));
     }
     protected function _registerOrLoginUser($data){
         $user = User::where('email','=',$data->email)->first();

@@ -1,13 +1,13 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
-    <a class="navbar-brand font-weight-bolder mr-3" href="{{url('/')}}"><img src="{{asset('assets/img/logo.png')}}"></a>
+    <a class="navbar-brand font-weight-bolder mr-3" href="{{url('/')}}"><img src="{{asset('img/logo.svg')}}" style="width: 40px;height: auto;border-radius: 50%"></a>
     <button class="navbar-light navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarsDefault">
-        <ul class="navbar-nav mr-auto align-items-center">
+        <ul class="navbar-nav mr-auto align-items-center mb-0">
             <form action="" class="bd-search hidden-sm-down">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control bg-graylight border-0 font-weight-bold" placeholder="Search..." name="search">
+                    <input type="text" class="form-control bg-graylight border-0 font-weight-bold" placeholder="Search Post Title..." name="search">
                 </div>
             </form>
         </ul>
