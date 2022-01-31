@@ -18,6 +18,7 @@
             <a target="_blank" class="text-dark" href="https://github.com/nangtiandi/pinterset"><u>Development</u> by Laravel Developer.</a>
           </span>
         </p>
+        <p class="credits font-weight-bold"><a href="{{route('policy')}}">Read terms & policy</a></p>
     </div>
 
 </footer>

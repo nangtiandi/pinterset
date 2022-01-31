@@ -29,6 +29,33 @@
 {{--    <link rel="stylesheet" href="{{asset('css/app.css')}}">--}}
 {{--    <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">--}}
 <!-- Primary Meta Tags -->
+    <style>
+        .card-cookie {
+            width: 350px;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 1px solid #d2d2dc;
+            border-radius: 6px;
+            -webkit-box-shadow: 0px 0px 5px 0px rgb(249, 249, 250);
+            -moz-box-shadow: 0px 0px 5px 0px rgba(212, 182, 212, 1);
+            box-shadow: 0px 0px 5px 0px rgb(161, 163, 164)
+        }
+
+        .cookies a {
+            text-decoration: none;
+            color: #000;
+            margin-top: 8px
+        }
+
+        .cookies a:hover {
+            text-decoration: none;
+            color: blue;
+            margin-top: 8px
+        }
+    </style>
 
 </head>
 <body>

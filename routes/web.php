@@ -53,7 +53,12 @@ Route::middleware('auth')->group(function (){
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/');
 Route::get('/post-view', [App\Http\Controllers\HomeController::class, 'CatPostView'])->name('cat.post');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home')->middleware('isAdmin');
-
+Route::get('services',function (){
+    return view('services');
+})->name('terms');
+Route::get('policy',function (){
+    return view('policy');
+})->name('policy');
 #socialite packages
 Route::get('/login/google',[LoginController::class,'redirectToGoogle'])->name('login.google');
 Route::get('/login/google/callback',[LoginController::class,'handleGoogleCallback']);

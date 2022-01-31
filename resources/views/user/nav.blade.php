@@ -13,10 +13,13 @@
         </ul>
         <ul class="navbar-nav ml-auto align-items-center">
             <li class="nav-item">
-                <a class="nav-link active" href="{{url('/')}}">Home</a>
+                <a class="nav-link {{Request::segment(1) == ''? 'active' : ''}}" href="{{url('/')}}">Home</a>
+            </li>
+            <li>
+                <a href="{{route('terms')}}" class="nav-link {{Request::segment(1) == 'services'? 'active' : ''}}">Services</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{route('post.owner')}}">Post</a>
+                <a class="nav-link {{Request::segment(1) == 'post-owner'? 'active' : ''}}" href="{{route('post.owner')}}">Post</a>
             </li>
             @auth()
             <li class="nav-item">
