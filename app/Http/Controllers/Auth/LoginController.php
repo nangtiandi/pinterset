@@ -59,10 +59,40 @@ class LoginController extends Controller
     }
     # Facebook Callback
     public function handleFacebookCallback(){
-        $user = Socialite::driver('facebook')->user();
-        $this->_registerOrLoginUser($user);
+        $socialiteUser = Socialite::driver('facebook')->stateless()->user();
+        // return dd($socialiteUser);
 
-        return redirect()->route('/')->with('toast',Custom::sweetAlert('success','Thanks For login with Facebook!'));
+        $findUser = User::where('provider_id',$socialiteUser->id)->orWhere('email',$socialiteUser->email)->first();
+
+        if($findUser){
+            Auth::login($findUser);
+            return redirect()->route('/');
+        }else{
+            $user = new User();
+            $user->name = $socialiteUser->name;
+            if(isset($socialiteUser->email)){
+                $user->email = $socialiteUser->email;
+            }
+            else{
+//                $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
+//                $randomName = rand(0,strlen($characters) -1 );
+                $n = 10;
+                $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                $randomString = '';
+                for ($i = 0; $i < $n; $i++) {
+                    $index = rand(0, strlen($characters) - 1);
+                    $randomString .= $characters[$index];
+                }
+                $user->email = $randomString . "@" ."example.com";
+            }
+            if(isset($socialiteUser->avatar)){
+                $user->avatar = $socialiteUser->avatar;
+            }
+            $user->provider_id = $socialiteUser->id;
+            $user->save();
+            Auth::login($user);
+            return redirect()->route('/')->with('toast',Custom::sweetAlert('success','Thanks For login with Facebook!'));
+        }
     }
     protected function _registerOrLoginUser($data){
         $user = User::where('email','=',$data->email)->first();

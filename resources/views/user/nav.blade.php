@@ -24,7 +24,11 @@
             @auth()
             <li class="nav-item">
                 <a href="{{route('user.profile')}}" class="nav-link">
-                    <img class="rounded-circle mr-2" src="{{asset('storage/profile/'.auth()->user()->avatar)}}" style="width: 30px;height: 30px"><span class="align-middle">{{auth()->user()->name}}</span>
+                    @if(strpos(auth()->user()->avatar,'https'))
+                        <img class="rounded-circle mr-2" src="{{ auth()->user()->avatar }}" style="width: 30px;height: 30px"><span class="align-middle">{{auth()->user()->name}}</span>
+                    @else
+                        <img class="rounded-circle mr-2" src="{{asset('storage/profile/'.auth()->user()->avatar)}}" style="width: 30px;height: 30px"><span class="align-middle">{{auth()->user()->name}}</span>
+                    @endif
                 </a>
             </li>
             @endauth
