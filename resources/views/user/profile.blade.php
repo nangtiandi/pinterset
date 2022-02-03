@@ -4,7 +4,12 @@
         <img src="{{asset('img/a.jpg')}}" alt="...background-image" style="width: 100%;max-height: 400px">
     </div>
     <div class="container mb-4 mt-md-0 mt-sm-6" style="position: relative">
-        <img src="{{asset('storage/profile/'.auth()->user()->avatar)}}" class="rounded-circle" width="128" style="height:128px;position:absolute;top:-70px">
+        @if(str_contains(auth()->user()->avatar,'https'))
+            <img src="{{ auth()->user()->avatar }}" class="rounded-circle" width="128" style="height:128px;position:absolute;top:-70px">
+        @else
+            <img src="{{asset('storage/profile/'.auth()->user()->avatar)}}" class="rounded-circle" width="128" style="height:128px;position:absolute;top:-70px">
+        @endif
+{{--        <img src="{{asset('storage/profile/'.auth()->user()->avatar)}}" class="rounded-circle" width="128" style="height:128px;position:absolute;top:-70px">--}}
         <form action="{{route('user.photo')}}" method="post" enctype="multipart/form-data" id="photoForm" >
             @csrf
             <button type="button" class="btn btn-outline-secondary btn-sm" id="photoUpload" style="position: absolute;left: 130px;top: -8px;z-index: 1000">
