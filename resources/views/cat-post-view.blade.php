@@ -9,21 +9,11 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarsExplore">
-{{--                        <ul class="navbar-nav">--}}
-{{--                            @foreach(\App\Models\Category::paginate(5) as $category)--}}
-{{--                                <li class="nav-item">--}}
-{{--                                    <a class="nav-link" href="{{route('cat.post')}}">{{$category->name}}</a>--}}
-{{--                                </li>--}}
-{{--                            @endforeach--}}
-{{--                            <li class="nav-item dropdown">--}}
-{{--                                <a class="nav-link dropdown-toggle" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</a>--}}
-{{--                                <div class="dropdown-menu shadow-lg" aria-labelledby="dropdown01">--}}
-{{--                                    @foreach(\App\Models\Category::all() as $category)--}}
-{{--                                        <a href="{{route('cat.post')}}" class="dropdown-item">{{$category->name}}</a>--}}
-{{--                                    @endforeach--}}
-{{--                                </div>--}}
-{{--                            </li>--}}
-{{--                        </ul>--}}
+                        @foreach(\App\Models\Category::paginate(5) as $category)
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('cat.post',$category->id)}}">{{$category->name}}</a>
+                            </li>
+                        @endforeach
                     </div>
                 </nav>
             </div>
@@ -31,7 +21,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="card-columns">
-                    @foreach($posts as $post)
+                    @foreach($posts->posts as $post)
                         <div class="card card-pin">
                             <img class="card-img" src="{{asset('storage/product/'.$post->photo)}}" alt="Card image">
                             <div class="overlay">

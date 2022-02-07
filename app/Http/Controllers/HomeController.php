@@ -36,9 +36,10 @@ class HomeController extends Controller
         })->latest('id')->get();
         return view('welcome',compact('posts'));
     }
-    public function CatPostView(){
-//        $category = Category::where('id')->get();
-        $posts = Post::where('category_id',Category::where('id'));
+    public function CatPostView($id){
+//        Post::where('category_id',$id)->get()
+        $posts = Category::with('posts')->findOrFail($id);
+//        return $posts;
         return view('cat-post-view',compact('posts'));
     }
     public function home()

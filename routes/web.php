@@ -51,7 +51,7 @@ Route::middleware('auth')->group(function (){
 });
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/');
-Route::get('/post-view', [App\Http\Controllers\HomeController::class, 'CatPostView'])->name('cat.post');
+Route::get('/post-view/{id}', [App\Http\Controllers\HomeController::class, 'CatPostView'])->name('cat.post');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home')->middleware('isAdmin');
 Route::get('services',function (){
     return view('services');

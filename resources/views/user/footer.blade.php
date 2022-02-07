@@ -26,6 +26,21 @@
 <script src="{{asset('assets/js/theme.js')}}"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+
+    let cardPin =  document.querySelectorAll('.card-pin');
+    let aaa = document.querySelectorAll('.aaa');
+    aaa.forEach((el)=>{
+        el.addEventListener('click',()=>{
+            let current_id = el.getAttribute('category_id');
+            cardPin.forEach((cp)=>{
+                cp.classList.add('d-none');
+            })
+            document.querySelectorAll(`[cat="${current_id}"]`).forEach((c)=>{
+                c.classList.remove('d-none');
+            })
+        })
+    })
+
     let photoUpload = document.getElementById('photoUpload');
     let photoInput = document.getElementById('photoInput');
     let photoForm = document.getElementById('photoForm');
@@ -53,6 +68,7 @@
         title: sessionInfo.title
     })
     @endif
+
 </script>
 </body>
 
